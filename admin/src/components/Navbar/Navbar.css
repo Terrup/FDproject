@@ -1,217 +1,112 @@
-.navbar{
+/* Global styles for the light theme */
+body {
+    background-color: #f5f5f5; /* Light background for the body */
+    color: #333; /* Dark text color for readability */
+}
+
+/* Navbar and sidebar background for light theme */
+.navbar {
+    background-color: #ffffff; /* White background for the navbar */
+    color: #333; /* Dark text color for navbar */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 4%;
 }
-.navbar .logo{
-    width: max(10%,80px);
+
+.navbar .logo {
+    width: max(10%, 250px);
 }
 
-.navbar .profile{
+.navbar .profile {
     width: 40px;
 }
 
-#visual-toggle-button{
-    width: 140px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+/* Sidebar (for admin dashboard) */
+.sidebar {
+    background-color: #ffffff; /* White background for sidebar */
+    color: #333; /* Dark text for sidebar items */
+    border-right: 1px solid #ddd; /* Light border for separation */
+}
+
+/* Sidebar items */
+.sidebar .item {
+    padding: 15px;
     cursor: pointer;
 }
-/* checkbox */
-#visual-toggle{
-    appearance: none;
-    display: none;
+
+.sidebar .item:hover {
+    background-color: #f0f0f0; /* Light hover effect for sidebar items */
 }
 
-.svgIcon-toggle{
-    width: 25px;
+/* Table styles for listing items */
+.table {
+    background-color: #ffffff; /* White background for the table */
+    border-radius: 8px;
+    padding: 20px;
+    border-collapse: collapse;
 }
 
-.moon-svg{
-    width: 13px;
-    position: absolute;
-    transition: all .3s;
-}
-.sun-svg{
-    opacity: 0;
-    transition: all .3s;
-}
-.lightmode .sun-svg{
-    filter: brightness(0);
-    transform: rotate(180deg);
-    opacity: 1;
-}
-.lightmode .moon-svg{
-    opacity: 0;
-}
-.animate .moon-svg{
-    transform: rotate(360deg);
-    transition: all .3s;
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-
-:root .logo {
-    filter: var(--logos-filter); 
+.table th {
+    background-color: #f0f0f0; /* Light background for table header */
+    color: #333; /* Dark text color for table header */
 }
 
-.lightcolors .logo {
-    filter: none; 
-}
-
-
-:root .addd {
-    filter: var(--logos-filter); 
-}
-
-.lightcolors .addd {
-    filter: none; 
-}
-
-:root .listt {
-    filter: var(--logos-filter); 
-}
-
-.lightcolors .listt {
-    filter: none; 
-}
-
-:root .orderr {
-    filter: var(--logos-filter); 
-}
-
-.lightcolors .orderr {
-    filter: none; 
-}
-
-:root p{
-    color: var(--light-text);
-}
-
-.lightcolors p{
-    filter: none;
-}
-
-:root .list-table-format.title{
-    background-color: var(--body-color);
-}
-
-.lightcolors .list-table-format.title{
-    filter: none;
-}
-
-:root .add-product-name input:focus,
-:root .add-product-description textarea:focus {
-    outline: black;
-}
-
-
-
-.lightmode .add-product-name input:focus,
-.lightmode .add-product-description textarea:focus {
-    outline: black;
-}
-
-
-/* DARK MODE FOR PRODUCTNAME & PRODUCTDESCRIPTION */
-:root .add-product-name input,
-:root .add-product-description textarea {
-    background-color: var(--background-root);
-    border: var(--border-root);
-    padding: var(--padding-root);
-    color: white; /* Add this line to set text color to white */
-}
-
-/* LIGHT MODE FOR PRODUCTNAME & PRODUCTDESCRIPTION */
-.lightcolors .add-product-name input,
-.lightcolors .add-product-description textarea {
-    background-color: white; /* Background color for light mode */
-    border: 2px solid gray; /* Border color for light mode */
-    color: black;
-}
-
-:root .add-product-name input::placeholder,
-:root .add-product-description textarea::placeholder {
-    color: gray; /* Set the placeholder text color to white */
-}
-
-.lightcolors .add-product-name input::placeholder,
-.lightcolors .add-product-description textarea::placeholder {
-    color: black;
-}
-
-
-:root .inputclasa,
-:root .selectt {
+/* Buttons and form elements */
+button {
+    background-color: #007bff; /* Blue button background */
     color: white;
-    border: 1px solid white;
-    background-color: black; 
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }
 
-
-.lightcolors .inputclasa,
-.lightcolors .selectt {
-    border: 1px solid gray;
-    background-color: transparent; 
-    color: black;
+button:hover {
+    background-color: #0056b3; /* Darker blue for button hover */
 }
 
-:root .inputclasa::placeholder,
-:root .selectt::placeholder {
-    color: gray;
+input, textarea, select {
+    background-color: #fff; /* White background for inputs */
+    border: 1px solid #ccc; /* Light border */
+    padding: 10px;
+    color: #333; /* Dark text color */
 }
 
-
-
-
-:root .profile {
-    filter: var(--logos-filter); 
+/* Links */
+a {
+    color: #007bff; /* Blue link color */
 }
 
-.lightcolors .profile {
-    filter: none; 
+a:hover {
+    color: #0056b3; /* Darker blue for link hover */
 }
 
-
-:root {
-    --input-color: black; /* Define custom color for input elements */
-    --background-root: black;
-    --border-root: 2px solid white;
-    --padding-root: 10px;
-    --upload: brightness(1) invert(1); /* Added a custom variable */
-    --logos-filter: brightness(0) invert(1); /* Added a custom variable */
-    --sidebar: black;
-    --border-color: #27272a;
-    --nav-color-one: #0d0d179a;
-    --nav-color-two: #0d0618;
-    --body-color: #121212;
-    --dark-text: #101010;
-    --light-text: #ffffff;
-    --light-text-secondary: #b9b9b9;
-    --light-text-desc: #d8d8d8;
+/* Adjusting profile image for light mode */
+.profile img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
-/* For lightcolors */
-.lightcolors {
-    --sidebar: #fff0ed;
-    --body-color: #FFFFFF;
-    --dark-text: #fff;
-    --light-text: #101010;
-    --nav-color-two: #f6f6f2;
-    --nav-color-one: #f1f1f17e;
-    --border-color: #ddd;
-    --light-text-secondary: #464853;
-    --light-text-desc: #020202;
-    --cards-text-color: #fff; /* White text color for cards container */
+/* Remove any dark mode-specific rules that were applied previously */
+.darkmode .navbar,
+.darkmode .sidebar {
+    background-color: #121212; /* Dark background - Removed for light mode */
+    color: #fff; /* Dark text for light mode */
 }
 
-/* Reset filter for images with class "image" in light mode */
-.lightcolors label img.image {
-    filter: none; /* Reset filter for images with class "image" in light mode */
+.darkmode button {
+    background-color: #444; /* Dark button color - Removed */
 }
 
+.darkmode input, .darkmode select {
+    background-color: #333; /* Dark background for input */
+    color: #fff; /* Light text color */
+}

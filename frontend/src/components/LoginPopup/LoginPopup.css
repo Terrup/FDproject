@@ -8,7 +8,7 @@
 }
 
 :root .login-popup-title{
-    color: white;
+    color: black;
 }
 
 .lightcolors .login-popup-title{
@@ -17,12 +17,9 @@
 
 
 :root .login-popup-container {
-    background-color: var(--body-color);
+    background-color: white
 }
 
-.lightcolors .login-popup-container {
-    background-color: white; 
-}
 
 .continuee{
     position: relative;

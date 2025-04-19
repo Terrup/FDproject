@@ -15,10 +15,6 @@
 }
 
 :root .h2we {
-    color: white; 
+    color: black; 
 }
 
-/* Remove filter from h2 elements in lightcolors theme */
-.lightcolors .h2we {
-    color: black
-}

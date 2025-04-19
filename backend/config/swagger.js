@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'Food Delivery API',
       version: '1.0.0',
-      description: 'Live API documentation for Tomato Delivery',
+      description: 'Live API documentation for Food Delivery',
     },
     servers: [
       { url: 'http://localhost:4000' },
