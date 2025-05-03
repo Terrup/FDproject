@@ -7,21 +7,19 @@ import { StoreContext } from '../../context/StoreContext';
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState('home');
-
-  const { getTotalCartAmount, token, setToken, setUserName } = useContext(StoreContext);
-
+  const { getTotalCartAmount, token, setToken, user, setUser } = useContext(StoreContext);
   const navigate = useNavigate();
-
-  // Get the username from localStorage or React Context
-  const userName = localStorage.getItem('userName'); // You can also use context if preferred
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('userName'); // Remove username on logout
     setToken('');
-    setUserName(''); // Update context state (if used)
+    setUser(null);
     navigate('/');
   };
+
+  const displayName = user && typeof user.name === 'string' && user.name.trim() !== ''
+    ? user.name.split(' ')[0]
+    : 'User';
 
   return (
     <div className='navbar'>
@@ -32,8 +30,6 @@ const Navbar = ({ setShowLogin }) => {
         <a href='#footer' onClick={() => setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>Contact Us</a>
       </ul>
       <div className="navbar-right">
-        <div className='navbar'>
-        </div>
         <div className="navbar-search-icon">
           <Link to='/cart'><img className='basketlogo' src={assets.basket_icon} alt="" /></Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
@@ -43,7 +39,7 @@ const Navbar = ({ setShowLogin }) => {
         ) : (
           <div className='navbar-profile'>
             <img src={assets.profile_icon} className='white-filter' alt="" />
-            <span className='user-name'>{userName}</span> {/* Display the username */}
+            <span className='user-name'>{displayName}</span>
             <ul className="nav-profile-dropdown">
               <li onClick={() => navigate('/myorders')}>
                 <img src={assets.bag_icon} alt="" /><p>Orders</p>

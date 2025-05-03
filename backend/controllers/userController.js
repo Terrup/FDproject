@@ -12,7 +12,8 @@ const createToken = (id) => {
 // @route   POST /api/users/register
 // @access  Public
 export const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
+
   try {
     // Check if user exists
     const exists = await userModel.findOne({ email });
@@ -20,12 +21,15 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ success: false, message: "User already exists." });
     }
 
-    // Validate email & password strength
+    // Validate
     if (!validator.isEmail(email)) {
       return res.status(400).json({ success: false, message: "Please enter a valid email." });
     }
     if (password.length < 8) {
-      return res.status(400).json({ success: false, message: "Please enter a strong password." });
+      return res.status(400).json({ success: false, message: "Password must be at least 8 characters." });
+    }
+    if (!firstName || !lastName) {
+      return res.status(400).json({ success: false, message: "Please enter first and last name." });
     }
 
     // Hash password
@@ -33,17 +37,24 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user
-    const newUser = new userModel({ name, email, password: hashedPassword });
+    const newUser = new userModel({
+      name: `${firstName} ${lastName}`,
+      email,
+      password: hashedPassword
+    });
     const user = await newUser.save();
 
     // Generate token
-    const token = createToken(user._id);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
     res.json({ success: true, token });
+
   } catch (error) {
-    console.error(error);
+    console.error("Register error:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
 
 // @desc    Log in an existing user
 // @route   POST /api/users/login
@@ -76,7 +87,6 @@ export const loginUser = async (req, res) => {
 // @route   POST /api/users/logout
 // @access  Private
 export const logoutUser = (req, res) => {
-  // With JWT, client simply discards token
   res.json({ success: true, message: "Logged out successfully" });
 };
 
@@ -85,7 +95,6 @@ export const logoutUser = (req, res) => {
 // @access  Private
 export const getCurrentUser = async (req, res) => {
   try {
-    // req.user.id is set by authMiddleware
     const user = await userModel.findById(req.user.id).select("-password");
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });

@@ -1,38 +1,51 @@
-import React, { useEffect } from 'react'
-import './Verify.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useContext } from 'react';
-import { StoreContext } from '../../context/StoreContext';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { StoreContext } from '../../context/StoreContext';
+import './Verify.css';
 
 const Verify = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const success = queryParams.get('success');
+  const orderId = queryParams.get('orderId');
 
-    const [searchParams,setSearchParams] = useSearchParams();
-    const success = searchParams.get("success")
-    const orderId = searchParams.get("orderId")
-    const {url} = useContext(StoreContext);
-    const navigate = useNavigate();
+  const { url } = React.useContext(StoreContext);
 
+  useEffect(() => {
     const verifyPayment = async () => {
-        const response = await axios.post(url+"/api/order/verify",{success,orderId});
-        if (response.data.success){
-            navigate("/myorders");
-        }
-        else {
-            navigate("/")
-        }
-    }
+      if (!orderId) return;
+      try {
+        const res = await axios.post(`${url}/api/orders/verify`, {
+          success,
+          orderId
+        });
 
+        console.log("✅ Order verification result:", res.data);
 
-    useEffect(()=>{
-        verifyPayment();
-    },[])
+        // Wait a second then redirect
+        setTimeout(() => {
+          navigate("/myorders");
+        }, 2000);
+      } catch (err) {
+        console.error("❌ Failed to verify payment:", err);
+        alert("Verification failed.");
+        navigate("/");
+      }
+    };
+
+    verifyPayment();
+  }, [orderId, success, url, navigate]);
 
   return (
-    <div className='verify'>
-        <div className="spinner"></div>
+    <div className="verify">
+      <div className="spinner"></div>
+      <p style={{ textAlign: 'center', marginTop: '20px' }}>
+        Verifying your payment... You’ll be redirected shortly.
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default Verify
+export default Verify;
