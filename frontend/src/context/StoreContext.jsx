@@ -8,7 +8,7 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState(null);
-  const url = "https://fdproject-2.onrender.com";
+  const url = "https://fdproject.onrender.com";
 
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
