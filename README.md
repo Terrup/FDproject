@@ -1,4 +1,4 @@
-<h1 align="center">Tomato Delivery</h1>
+<h1 align="center">Bingo Food Delivery</h1>
   
   
   <p align="center">
