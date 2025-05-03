@@ -18,11 +18,12 @@ const PlaceOrder = () => {
     phone: ""
   });
 
+  const [loading, setLoading] = useState(false); // ✅ Prevent double submission
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    
+
     if (name === 'phone') {
-      // Format phone number as (xxx)xxx-xxxx
       const cleaned = value.replace(/\D/g, '').substring(0, 10);
       let formatted = cleaned;
       if (cleaned.length > 6) {
@@ -38,6 +39,9 @@ const PlaceOrder = () => {
 
   const placeOrder = async (event) => {
     event.preventDefault();
+    if (loading) return; // prevent re-click
+    setLoading(true);
+
     console.log("🟡 Checkout button clicked");
 
     let orderItems = [];
@@ -71,6 +75,8 @@ const PlaceOrder = () => {
     } catch (err) {
       console.error("❌ Order placement error:", err);
       alert("Order failed. See console for details.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,7 +127,9 @@ const PlaceOrder = () => {
               <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
             </div>
           </div>
-          <button type='submit'>PROCEED TO PAYMENT</button>
+          <button type='submit' disabled={loading}>
+            {loading ? "Processing..." : "PROCEED TO PAYMENT"}
+          </button>
         </div>
       </div>
     </form>
