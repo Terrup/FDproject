@@ -32,7 +32,7 @@ router.post('/add', authMiddleware, addToCart);
 /**
  * @openapi
  * /api/cart/remove:
- *   post:
+ *   delete:
  *     summary: Remove an item from the user's cart
  *     tags: [Cart]
  *     security: [ { bearerAuth: [] } ]
@@ -52,7 +52,7 @@ router.post('/add', authMiddleware, addToCart);
  *       401:
  *         description: Unauthorized
  */
-router.post('/remove', authMiddleware, removeFromCart);
+router.delete('/remove', authMiddleware, removeFromCart);
 
 /**
  * @openapi

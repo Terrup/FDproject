@@ -4,7 +4,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Food Delivery API',
+      title: 'Bingo Food API',
       version: '1.0.0',
       description: 'Live API documentation for Food Delivery',
     },

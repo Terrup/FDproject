@@ -25,12 +25,24 @@ const StoreContextProvider = (props) => {
 
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    if (token) {
-      await axios.post(url + "/api/cart/remove", { itemId }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+    
+    if (token && user) {
+      try {
+        await axios.delete(`${url}/api/cart/remove`, {
+          data: {
+            userId: user._id,
+            itemId: itemId
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      } catch (err) {
+        console.error("Failed to remove item from cart:", err);
+      }
     }
   };
+  
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;

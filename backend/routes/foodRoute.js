@@ -47,7 +47,7 @@ const foodRouter = express.Router();
  *       500:
  *         description: Server error
  */
-foodRouter.post("/add", addFood); // Updated: No image upload needed
+foodRouter.post("/add", addFood);
 
 /**
  * @openapi
@@ -72,18 +72,12 @@ foodRouter.post("/add", addFood); // Updated: No image upload needed
  *                   items:
  *                     type: object
  *                     properties:
- *                       _id:
- *                         type: string
- *                       name:
- *                         type: string
- *                       description:
- *                         type: string
- *                       price:
- *                         type: number
- *                       category:
- *                         type: string
- *                       image:
- *                         type: string
+ *                       _id: { type: string }
+ *                       name: { type: string }
+ *                       description: { type: string }
+ *                       price: { type: number }
+ *                       category: { type: string }
+ *                       image: { type: string }
  *       500:
  *         description: Server error
  */
@@ -92,7 +86,7 @@ foodRouter.get("/list", listFood);
 /**
  * @openapi
  * /api/foods/remove:
- *   post:
+ *   delete:
  *     summary: Remove a food item by ID
  *     tags:
  *       - Foods
@@ -125,6 +119,6 @@ foodRouter.get("/list", listFood);
  *       500:
  *         description: Server error
  */
-foodRouter.post("/remove", removeFood);
+foodRouter.delete("/remove", removeFood);
 
 export default foodRouter;
