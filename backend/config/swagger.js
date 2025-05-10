@@ -9,8 +9,8 @@ const options = {
       description: 'Live API documentation for Food Delivery',
     },
     servers: [
-      { url: 'http://localhost:4000' },
-      { url: 'https://fdproject.onrender.com' }
+      { url: 'https://fdproject.onrender.com' },
+      { url: 'http://localhost:4000' }
     ],
     components: {
       securitySchemes: {
