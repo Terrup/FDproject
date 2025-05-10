@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       { url: 'http://localhost:4000' },
-      { url: 'https://your-production-domain.com' }
+      { url: 'https://fdproject.onrender.com' }
     ],
     components: {
       securitySchemes: {
